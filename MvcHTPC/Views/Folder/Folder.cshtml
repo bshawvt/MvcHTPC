@@ -1,0 +1,17 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+FolderID: @ViewBag.id<br />
+
+ ---
+#in ascending order, the first date earlier date obviuous beginning content.. optional on folder creation
+[dbContent.Where(this.id == folder.id).byDate()=>content] 
+[content.id=>username] [content.date]
+[content.title]
+[content.body]yo, this site sucks.[/body]
+ ---
+[dbContent.Where(folderId == folder.id).byDate()=>content]
+[content.userid=>username] [content.date]
+[content.title]
+[content.body]yo, this site sucks.[/body]

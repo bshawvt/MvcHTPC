@@ -1,0 +1,189 @@
+﻿@using MvcHTPC.Utilities;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Home Theater</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    
+    <link href="@Url.Content("~/Content/css/navbar-theme.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/common-theme.css")" rel="stylesheet" type="text/css" />
+    @*<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">*@
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <script src="@Url.Content("/Scripts/htpcsuite/htpc.core.js")"></script>
+    <script src="@Url.Content("/Scripts/htpcsuite/htpc.common.js")"></script>
+
+    @RenderSection("scripts", required: false)
+
+    <style type="text/css">
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        ::-webkit-scrollbar-button {
+            width: 0px;
+            height: 0px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #e1e1e1;
+            border: 1px solid #2e2e2e;
+            border-radius: 50px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ffffff;
+        }
+
+        ::-webkit-scrollbar-thumb:active {
+            background: #b1b1b1;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #404040;
+            border: 0px solid #737373;
+            border-radius: 0px;
+        }
+
+        ::-webkit-scrollbar-track:hover {
+            background: #676767;
+        }
+
+        ::-webkit-scrollbar-track:active {
+            background: #676767;
+        }
+
+        ::-webkit-scrollbar-corner {
+            background: transparent;
+        }
+
+    </style>
+</head>
+<body>
+    @*@Scripts.Render("~/bundles/jquery")*@
+
+    <script>
+        $.noConflict();
+        jQuery(document).ready(function () {
+            jQuery('.dropdown-menu button').click(function (e) {
+                e.stopPropagation(); //This will prevent the event from bubbling up and close the dropdown when you type/click on text boxes.
+            });
+        });
+    </script>
+
+    <div class="container">
+        <nav class="navbar navbar-fixed-top navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#u-navbar" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">A catchy logo goes here</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="u-navbar">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/Community/Index/">Community</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Account<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu i-dropdown">
+                                <li style="padding: 5px;">@{Html.RenderAction("_AccountPartial", "Auth");}</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="input-group">
+                        <label class="sr-only">Search</label>
+                        <input class="form-control" placeholder="Search..." style="border-radius: 4px 0px 0px 4px;">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <div class="i-content-body container body-content">
+
+            @{ Html.RenderAction("_NotifierPartial", "Community"); }
+
+            @RenderBody()
+            <footer>
+                <hr />
+                <p>&copy; 2017@* - DateTime.Now.Year*@</p>
+            </footer>
+        </div>
+
+    </div>
+
+</body>
+</html>
+
+
+@*
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#u-navbar" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Brand</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="u-navbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu i-dropdown">
+                            <li class="i-dropdown-item">
+                                <a href="/Account/Index" id="" class="btn btn-primary btn-sm btn-block" style="border: 1px solid #ccc;">
+                                    Overview
+                                </a>
+                            </li>
+                            <li class="i-dropdown-item">
+                                <a href="/Account/Settings" id="" class="btn btn-primary btn-sm btn-block" style="border: 1px solid #ccc;">
+                                    Settings
+                                </a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li class="i-dropdown-item">
+                                <a id="u-logout" class="btn btn-default btn-sm btn-block" href="~/Auth/Logout">
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="input-group">
+                    <label class="sr-only">Search</label>
+                    <input class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                    </span>
+                </div>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+*@

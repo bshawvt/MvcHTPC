@@ -1,0 +1,169 @@
+﻿@model MvcHTPC.ViewModels.AccountViewModel
+
+<script type="text/javascript">
+
+    var d = function (msg) {
+        console.log("%cDEBUG:" + "%c" + msg, "color: #bada55; background: #101a1e; padding: 2px; border-radius: 5px 0px 0px 5px;", "color: #76bde0; background: #101a1e; padding: 2px; border-radius: 0px 5px 5px 0px;");
+    }
+
+    jQuery("#document").ready(function () {
+        d("Ready ready!");
+        jQuery('.dropdown-menu input').click(function (e) {
+            e.stopPropagation(); //This will prevent the event from bubbling up and close the dropdown when you type/click on text boxes.
+        });
+
+        jQuery("#login-register").click(function () {
+            d("anonymous register click");
+            if (!layoutSwitch) {
+                enableRegisterLayout();
+            } else {
+                disableRegisterLayout();
+            }
+        });
+    });
+    var counter = 0;
+    var layoutSwitch = 0;
+    var enableRegisterLayout = function () {
+        counter++; // hmm
+        layoutSwitch = !layoutSwitch;
+        var registerBtn = document.getElementById("login-register");
+        registerBtn.textContent = "Cancel";
+        var loginBtn = document.getElementById("login-button");
+        loginBtn.textContent = "Register";
+
+        var username = document.getElementById("username");
+        var password = document.getElementById("password");
+        var confirm = document.getElementById("password-confirm");
+        confirm.style.display = "block";
+        var email = document.getElementById("email");
+        email.style.display = "block";
+        var forgottenBtn = document.getElementById("forgotten");
+        forgottenBtn.style.display = "none";
+        console.log(email);
+
+        jQuery(".form-group form").attr("action", "/Auth/Register");
+
+    }
+
+    var disableRegisterLayout = function () {
+        layoutSwitch = !layoutSwitch;
+        var registerBtn = document.getElementById("login-register");
+        if (counter < 5) { registerBtn.textContent = "Register"; } else { registerBtn.textContent = "Make up yo dang mind!"; }
+        var loginBtn = document.getElementById("login-button");
+        loginBtn.textContent = "Login";
+
+        var username = document.getElementById("username");
+        var password = document.getElementById("password");
+        var confirm = document.getElementById("password-confirm");
+        confirm.style.display = "none";
+        var email = document.getElementById("email");
+        email.style.display = "none";
+        var forgottenBtn = document.getElementById("forgotten");
+        forgottenBtn.style.display = "block";
+        console.log(email);
+
+        jQuery(".form-group form").attr("action", "/Auth/Login");
+
+    }
+
+    var checkInput = function () {
+        var username = jQuery("#username").val();
+        var password = jQuery("#password").val();
+        var confirm = jQuery("#password-confirm").val();
+        var email = jQuery("#email").val();
+
+        jQuery(".form-group form p").removeClass("has-error");
+        jQuery(".form-group form p").removeClass("has-feedback");
+
+        var errors = [];
+
+        if (username.length < 4 || username.length > 24) {
+            errors.push("usernames must be between 4 and 24 characters long");
+            jQuery(".form-group form p")[0].classList = "has-error";
+
+        }
+        if (password.length < 8 || password.length > 32) {
+            errors.push("password must be between 8 and 32 characters long");
+            jQuery(".form-group form p")[1].classList = "has-error";
+        }
+        if (layoutSwitch) {
+            if (password !== confirm || confirm.length < 8) {
+                errors.push("confirm password is bad");
+                jQuery(".form-group form p")[2].classList = "has-error";
+            }
+            if (email.length < 3 || email.includes("@@") != true || email.includes(".") != true) {
+                errors.push("invalid email address");
+                jQuery(".form-group form p")[3].classList = "has-error";
+            }
+        }
+        console.log(errors);
+        if (errors.length > 0)
+        {
+            console.log("do not procede");
+            return false;
+        }
+    }
+
+
+</script>
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <div class="form-group">
+        @using (Html.BeginForm("Login", "Auth", FormMethod.Post, new { nctype="multipart/form-data", onsubmit="return checkInput()" }))
+        {
+            <p>
+                <label class="sr-only">Username</label>
+                @*<input type="email" class="form-control" id="login-email" placeholder="Email" />*@
+                @Html.TextBox("username", null, new { @class = "form-control", placeholder = "Username", id = "username" })
+            </p>
+            <p>
+                <label class="sr-only">Password</label>
+                @*<input type="password" class="form-control" id="login-password" placeholder="Password" />*@
+                @Html.Password("password", null, new { @class = "form-control", id="password", placeholder = "Password", style = "width: 100%;" })
+            </p>
+            <p>
+                <label class="sr-only">Confirm Password</label>
+                <input type="password" class="form-control" id="password-confirm" style="display: none; width: 100%;" placeholder="Confirm Password"/>
+            </p>
+            <p>
+                <label class="sr-only">Email</label>
+                @Html.TextBox("email", null, new { @class = "form-control", placeholder = "Email", id="email", style = "display: none;width: 100%;" })
+            </p>
+            <p>
+                <button type="submit" name="login" class="btn btn-primary btn-sm btn-block" id="login-button">Login</button>
+            </p>
+            <p>
+                @*<button type="submit" name="register" class="btn btn-default btn-sm btn-block">Register</button>*@
+                <button type="button" id="login-register" name="register" class="btn btn-default btn-sm btn-block">
+                    Register
+                </button>
+            </p>
+        }
+        <a href="#" id="forgotten"><small>forgot something?</small></a>
+    </div>
+            
+    
+}
+else
+{
+    <div>
+        <p>
+            <a href="/Account/Index" id="" class="btn btn-primary btn-sm btn-block">
+                Overview
+            </a>
+        </p>
+        <p>
+            <a href="/Account/Settings" id="" class="btn btn-primary btn-sm btn-block">
+                Settings
+            </a>
+        </p>
+        <a name="logout" class="btn btn-default btn-sm btn-block" href="~/Auth/Logout">
+            Logout
+        </a>
+    </div>
+
+
+}
+
+

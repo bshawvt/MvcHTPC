@@ -1,0 +1,19 @@
+﻿@model MvcHTPC.ViewModels.HomeViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (User.Identity.IsAuthenticated)
+{
+    <div>
+        <p>Welcome @Model.userDto.username!</p>
+        [Saved channels ticker]<br/>
+        [Recommended channels ticker]
+    </div>
+}
+else
+{ // we still want people to enjoy website features even when they aren't logged in
+    <div>
+        [Explore]->[Recommended channels]->[Login nag]
+    </div>
+}
+

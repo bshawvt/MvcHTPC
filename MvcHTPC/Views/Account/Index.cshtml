@@ -1,0 +1,24 @@
+﻿@model MvcHTPC.ViewModels.AccountViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Account/Index</h1>
+
+
+@if (Model.userDto != null)
+{
+
+    <text>Hello @Model.userDto.username.<br />There is nothing here for you, yet.</text>
+    if(Model.userDto.accessLevel == MvcHTPC.Models.DbModels.DbStaticEnums.AccessLevel.ADMINISTRATOR)
+    {
+        <span>
+           @Html.ActionLink("Admin view", "Index", "Admin")
+        </span>
+    }
+
+}
+else
+{
+    <text>You technically don't exist to me. Sorry.</text>
+}

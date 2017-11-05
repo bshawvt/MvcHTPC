@@ -1,0 +1,36 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    <script>
+        var htpc_notifierTimer = null;
+        jQuery(window).ready(function () {
+            
+            htpc_notifierTimer = setTimeout("notifierApplet()", 5000);
+            
+        });
+
+        var t;
+
+        var notifierApplet = function () {
+
+            if (htpc_notifierTimer != null) {
+                clearTimeout(htpc_notifierTimer);
+                htpc_notifierTimer = setTimeout("notifierApplet()", 5000);
+            }
+            d("polling...");
+
+            var r = new XMLHttpRequest();
+            r.open('Get', 'Community/Notifier');
+            r.onreadystatechange = function () {
+                if (r.readyState == 4) {
+                    var json = JSON.parse(r.responseText);
+                    t = json;
+                    console.log(json);
+                    for (var i = 0; i < json.notes.notificationDtos.length; i++) {
+                        iAddDialog(json.notes.notificationDtos[i].title, json.notes.notificationDtos[i].message);
+                    }
+                }
+            }
+            r.send();
+        }
+    </script>
+}

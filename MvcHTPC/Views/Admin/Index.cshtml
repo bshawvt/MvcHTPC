@@ -1,0 +1,187 @@
+﻿@model MvcHTPC.ViewModels.AdminViewModel
+@using MvcHTPC.Models.DbModels
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .i-seperator {
+        border: 1px solid #000;
+        padding: 5px;
+        float: left;
+    }
+    .i-selector {
+        border-radius: 4px;
+    }
+</style>
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery("#admin-forum").on("click", function () {
+            d("admin click");
+            jQuery("#admin-forum-dialog").dialog("open");
+        });
+        jQuery("#admin-user").on("click", function () {
+           d("user click");
+        });
+        jQuery("#admin-group").on("click", function () {
+            d("group click");
+        });
+        jQuery("#admin-content").on("click", function () {
+            d("content click");
+        });
+        jQuery("#admin-folder").on("click", function () {
+            d("folder click");
+        });
+        jQuery("#admin-notify").on("click", function () {
+            jQuery("#admin-notify-dialog").dialog("open");
+        })
+
+        jQuery("#admin-forum-dialog").dialog({
+            title: "Forum Editor",
+            height: 'auto',
+            width: 'auto',
+            resizable: false,
+            autoOpen: true,
+            modal: false
+        });
+        jQuery("#admin-notify-dialog").dialog({
+            title: "Send a Notification",
+            height: 'auto',
+            width: 'auto',
+            resizable: false,
+            autoOpen: false,
+            modal: false
+        });
+    });
+
+    var postCreateNotification = function () {
+        var title = jQuery("#u-notify-title").val();
+        var message = jQuery("#u-notify-message").val();
+        var userId = jQuery("#u-notify-userId").val();
+
+        console.log("title: %s\nmessage: %s\nuserId: %s", title, message, userId);
+
+        var r = new XMLHttpRequest();
+        r.open('POST', '/Admin/CreateNotification')
+        r.onreadystatechange = function () {
+            if (r.readyState == 4) {
+                console.log(r.responseText);
+            }
+        }
+        r.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        r.send("title=" + title + "&message=" + message + "&id=" + userId);
+    }
+
+
+    var postCreateForum = function () {
+        var title = jQuery("#u-forum-title").val();
+        var description = jQuery("#u-forum-description").val();
+        var groups = jQuery("#u-forum-groups").val();
+        var state = jQuery("#u-forum-state").val();
+
+        console.log("title: %s\ndescription: %s\ngroups: %s\nstate: %s", title, description, groups, state);
+
+        var r = new XMLHttpRequest();
+        r.open('POST', '/Admin/CreateForum')
+        r.onreadystatechange = function () {
+            if (r.readyState == 4) {
+                console.log(r.responseText);
+            }
+        }
+        r.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        r.send("title="+title+"&description="+description+"&groups="+groups+"&state=" + state);
+    }
+
+
+
+</script>
+
+
+<div id="admin-forum-dialog">
+    <div class="form-group i-seperator">
+        <p>
+            <label for="u-forum-title">Forum Title</label>
+            <input type="text" class="form-control" id="u-forum-title" placeholder="Forum Title..." />
+            <label for="u-forum-title">Forum Description</label>
+            <input type="text" class="form-control" id="u-forum-description" placeholder="Forum Description..." />
+            
+            <div>
+                <label for="u-forum-groups">Group Owners</label>
+                <select id="u-forum-groups" class="i-selector">
+                @foreach (var i in Model.groupDtos)
+                {
+                    <option>@i</option>
+                }
+                </select>
+            </div>
+            <div>
+                <label for="u-forum-state">Hidden State</label>
+                <select id='u-forum-state' class="i-selector">
+                @foreach (var i in Enum.GetNames(typeof(DbStaticEnums.HiddenState)))
+                {
+                    <option>@i</option>
+                }
+                </select>
+            </div>
+
+        </p>
+        <p>
+            <button class="btn btn-primary" onclick="postCreateForum()">Create Forum</button>
+        </p>
+    </div>
+
+    <div class="form-group i-seperator">
+        <p>
+            <select class="i-selector">
+                <option value="default">No forum selected...</option>
+            </select>
+        </p>
+        <span class="clearfix"></span>
+        <p>
+            <button class="btn btn-primary">Modify Forum</button>
+        </p>
+    </div>
+</div>
+
+<div id="admin-notify-dialog">
+    <div class="form-group i-seperator">
+        <p>
+            <label for="u-notify-title">Title</label>
+            <input type="text" class="form-control" id="u-notify-title" placeholder="Title..." />
+            <label for="u-notify-message">Message</label>
+            <input type="text" class="form-control" id="u-notify-message" placeholder="Message..." />
+
+            <div>
+                <label for="u-notify-userId">userId</label>
+                <select id="u-notify-userId" class="i-selector">
+                        <option>-1</option>
+                </select>
+            </div>
+        </p>
+        <p>
+            <button class="btn btn-primary" onclick="postCreateNotification()">Send</button>
+        </p>
+    </div>
+
+    <div class="form-group i-seperator">
+        <p>
+            <select class="i-selector">
+                <option value="default">No forum selected...</option>
+            </select>
+        </p>
+        <span class="clearfix"></span>
+        <p>
+            <button class="btn btn-primary">Modify Forum</button>
+        </p>
+    </div>
+</div>
+
+Only administration can view this page!<br />
+
+<a id="admin-forum"class="glyphicon glyphicon-list-alt glyphicon-th-large"></a>
+<a id="admin-user" class="glyphicon glyphicon-user"></a>
+<a id="admin-group" class="glyphicon glyphicon-user"></a>
+<a id="admin-content" class="glyphicon glyphicon-comment"></a>
+<a id="admin-folder" class="glyphicon glyphicon-folder-open"></a>
+<a id="admin-notify" class="glyphicon glyphicon-send"></a>

@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery(document).on('click', '.i-removable-close', function () {
+            var idNum = $(this).attr("id");
+            d("idNum: " + idNum);
+            jQuery(".i-removable[id='" + idNum + "']").remove();
+        });
+
+        iAddDialog("Hello World", "This is a test message");
+        iAddDialog("Test", "Welcome to the developer sandbox!");
+
+    });
+
+    var i_dialogCounter = 0;
+    var iAddDialog = function (title, body, parent) {
+        var html = "";
+        
+        html += '<div class="panel panel-default i-removable" id="' + i_dialogCounter + '">';
+        html += '<div class="panel-heading">';
+        html += '<button class="i-removable-close close" id="' + i_dialogCounter + '" type="button"><span>&times;</span></button>';
+        html += '<h3 class="panel-title">' + title + '</h3>';
+        html += '</div>';
+        html += '<div class="panel-body">';
+        html += body;
+        html += '</div>';
+        html += '</div>';
+
+        if (jQuery(".i-dialog-provider").length) {
+            jQuery('.i-dialog-provider').append(html);
+        }
+
+        i_dialogCounter++;
+
+    }
+</script>*@
+

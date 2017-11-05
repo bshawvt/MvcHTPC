@@ -1,0 +1,9 @@
+.vs/slnx.sqlite
+.vs/config/applicationhost.config
+.vs/VSWorkspaceState.json
+.vs/ProjectSettings.json
+.vs/MvcHTPC/v15/.suo
+packages/Antlr.3.4.1.9004/Antlr.3.4.1.9004.nupkg
+packages/
+MvcHTPC/obj/
+MvcHTPC/bin/

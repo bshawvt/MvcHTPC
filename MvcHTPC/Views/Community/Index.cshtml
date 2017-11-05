@@ -1,0 +1,56 @@
+﻿@model MvcHTPC.ViewModels.CommunityViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="border: 1px solid #000; margin: 5px; padding: 5px; border-radius: 5px;">
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th class="col-sm-1" style="min-width: 32px;"></th>
+                <th class="col-md-4" style="width: 100%;"></th>
+                <th class="col-sm-1" style="min-width: 150px;"></th>
+            </tr>
+        </thead>
+        <tbody  style="border-bottom: 1px solid #000;">
+            @foreach (var item in Model.forumDtos)
+            {
+                <tr>
+                    <th>
+                        <span class="glyphicon glyphicon-question-sign" style="font-size: 64px;"></span>
+                    </th>
+                    <td style="border-left: 1px solid #000; border-right: 1px solid #000;">
+                        <p>
+                            <h4><a href='@Url.Action("Forum", "Community", new { id = @item.id })'>@item.title</a></h4>
+                            <span>@item.description</span>
+                        </p>
+                    </td>
+                    <td>
+                        @if (Model.contentDto != null)
+                        {
+                        <p>
+                            <span>
+                                <a href='@Url.Action("Index", "Folder", new { id = Model.contentDto.folderId, content = Model.contentDto.id })'>@Model.contentDto.title</a>
+                            </span>
+                        </p>
+                        <p>
+                            <span>@Model.contentDto.dateOfCreation</span>
+                        </p>
+                        }
+                        else
+                        {
+                            <p>
+                                <span>
+                                    No new activity
+                                </span>
+                            </p>
+                            <p>
+                                <span>-</span>
+                            </p>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

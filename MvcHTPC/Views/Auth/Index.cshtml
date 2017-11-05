@@ -1,0 +1,172 @@
+﻿@model MvcHTPC.ViewModels.AuthViewModel
+@using MvcHTPC.Services
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+
+    var d = function (msg) {
+        console.log("%cDEBUG:" + "%c" + msg, "color: #bada55; background: #101a1e; padding: 2px; border-radius: 5px 0px 0px 5px;", "color: #76bde0; background: #101a1e; padding: 2px; border-radius: 0px 5px 5px 0px;");
+    }
+
+    jQuery("#document").ready(function () {
+        d("Ready ready!");
+        jQuery('.dropdown-menu input').click(function (e) {
+            e.stopPropagation(); //This will prevent the event from bubbling up and close the dropdown when you type/click on text boxes.
+        });
+
+        jQuery("#login-register2").click(function () {
+            d("anonymous register click");
+            if (!layoutSwitch2) {
+                enableRegisterLayout2();
+            } else {
+                disableRegisterLayout2();
+            }
+        });
+    });
+    var counter = 0;
+    var layoutSwitch2 = 0;
+    var enableRegisterLayout2 = function () {
+        counter++; // hmm
+        layoutSwitch2 = !layoutSwitch2;
+        var registerBtn = document.getElementById("login-register2");
+        registerBtn.textContent = "Cancel";
+        var loginBtn = document.getElementById("login-button2");
+        loginBtn.textContent = "Register";
+
+        var username = document.getElementById("username2");
+        var password = document.getElementById("password2");
+        var confirm = document.getElementById("password-confirm2");
+        confirm.style.display = "block";
+        var email = document.getElementById("email2");
+        email.style.display = "block";
+        var forgottenBtn = document.getElementById("forgotten2");
+        forgottenBtn.style.display = "none";
+        console.log(email);
+
+        jQuery(".form-group2 form").attr("action", "/Auth/Register");
+
+    }
+
+    var disableRegisterLayout2 = function () {
+        layoutSwitch2 = !layoutSwitch2;
+        var registerBtn = document.getElementById("login-register2");
+        if (counter < 5) { registerBtn.textContent = "Register"; } else { registerBtn.textContent = "Make up yo dang mind!"; }
+        var loginBtn = document.getElementById("login-button2");
+        loginBtn.textContent = "Login";
+
+        var username = document.getElementById("username2");
+        var password = document.getElementById("password2");
+        var confirm = document.getElementById("password-confirm2");
+        confirm.style.display = "none";
+        var email = document.getElementById("email2");
+        email.style.display = "none";
+        var forgottenBtn = document.getElementById("forgotten2");
+        forgottenBtn.style.display = "block";
+        console.log(email);
+
+        jQuery(".form-group2 form").attr("action", "/Auth/Login");
+
+    }
+
+    var checkInput2 = function () {
+        var username = jQuery("#username2").val();
+        var password = jQuery("#password2").val();
+        var confirm = jQuery("#password-confirm2").val();
+        var email = jQuery("#email2").val();
+
+        jQuery(".form-group2 form p").removeClass("has-error");
+
+        var errors = [];
+
+        if (username.length < 4 || username.length > 24) {
+            errors.push("usernames must be between 4 and 24 characters long");
+            jQuery(".form-group2 form p")[0].classList = "has-error";
+
+        }
+        if (password.length < 8 || password.length > 32) {
+            errors.push("password must be between 8 and 32 characters long");
+            jQuery(".form-group2 form p")[1].classList = "has-error";
+        }
+        if (layoutSwitch2) {
+            if (password !== confirm || confirm.length < 8) {
+                errors.push("comfirm password is bad");
+                jQuery(".form-group2 form p")[2].classList = "has-error";
+            }
+            if (email.length < 3 || email.includes("@@") != true || email.includes(".") != true) {
+                errors.push("invalid email address");
+                jQuery(".form-group2 form p")[3].classList = "has-error";
+            }
+        }
+        console.log(errors);
+        if (errors.length > 0)
+        {
+            console.log("do not procede");
+            return false;
+        }
+    }
+
+</script>
+
+@if (Model.errors != null || Model.errors.Count() > 0)
+{
+    foreach (var i in Model.errors)
+    {
+        <div class="alert alert-danger">
+            <strong>Error:</strong>
+            <span>@i</span>
+        </div>
+    }
+}
+@if (ViewBag.registrationSuccessful == true)
+{
+    <div class="alert alert-success">
+        <strong>Success:</strong>
+        <span>You have registered an account. You may log in now.</span>
+    </div>
+}
+
+<div class="container center-block" style="max-width: 300px;">
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <div class="form-group2">
+            @using (Html.BeginForm("Login", "Auth", FormMethod.Post, new { nctype = "multipart/form-data", onsubmit = "return checkInput2()" }))
+            {
+                <p>
+                    <label class="sr-only">Username</label>
+                    @*<input type="email" class="form-control" id="login-email" placeholder="Email" />*@
+                    @Html.TextBox("username", null, new { @class = "form-control", placeholder = "Username", id = "username2" })
+                </p>
+                <p>
+                    <label class="sr-only">Password</label>
+                    @*<input type="password" class="form-control" id="login-password" placeholder="Password" />*@
+                    @Html.Password("password", null, new { @class = "form-control", id = "password2", placeholder = "Password", style = "width: 100%;" })
+                </p>
+                <p>
+                    <label class="sr-only">Confirm Password</label>
+                    <input type="password" class="form-control" id="password-confirm2" style="display: none; width: 100%;" placeholder="Confirm Password" />
+                </p>
+                <p>
+                    <label class="sr-only">Email</label>
+                    @Html.TextBox("email", null, new { @class = "form-control", placeholder = "Email", id = "email2", style = "display: none;width: 100%;" })
+                </p>
+                <p>
+                    <button type="submit" name="login" class="btn btn-primary btn-sm btn-block" id="login-button2">Login</button>
+                </p>
+                <p>
+                    @*<button type="submit" name="register" class="btn btn-default btn-sm btn-block">Register</button>*@
+                    <button type="button" id="login-register2" name="register" class="btn btn-default btn-sm btn-block">
+                        Register
+                    </button>
+                </p>
+            }
+            <a href="#" id="forgotten2"><small>forgot something?</small></a>
+        </div>
+    }
+    else
+    {
+        <span>You do not need this page, you are already logged in!</span>
+    }
+</div>

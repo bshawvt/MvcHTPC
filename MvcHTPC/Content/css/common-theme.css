@@ -1,0 +1,36 @@
+﻿.i-dropdown {
+    padding: 4px;
+    margin: 2px;
+}
+.i-dropdown-item {
+    padding: 1px;
+}
+.i-anchor-button {
+    border: 1px solid #fff;
+}
+
+.i-content-body {
+    width: 95%;
+    float: none;
+    margin: 0 auto;
+    padding: 25px;
+    background-color: #fff;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.i-content-width {
+    width: 100%;
+}
+
+.ui-dialog {
+    z-index: 10000 !important;
+}
+
+hr {
+    border-color: rgb(100, 100, 100);
+}
+
+body {
+    background-image: url("/Content/Images/bg_stripped.png");
+}

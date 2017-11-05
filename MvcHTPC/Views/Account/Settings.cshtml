@@ -1,0 +1,34 @@
+﻿@model MvcHTPC.ViewModels.AccountViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+Here, have some settings. <span style="font-style: italic;">"It was a dark and stormy night."</span>
+
+<div style="width: 400px; height: auto; background-color: rgb(128, 128, 128);">
+    <p>
+        <label>Email</label>:<br />
+        <input value="@Model.userDto.email" />
+    </p>
+    <p>
+        <label>Date of Creation</label>:<br />
+        <input value="@Model.userDto.dateOfCreation" />
+    </p>
+    <p>
+        <label>Groups</label><br />
+        <input value="@Model.userDto.groupIds" />
+    </p>
+    <p>
+        <label>Access Level</label>:<br />
+        <input value="@Model.userDto.accessLevel" />
+    </p>
+    <p>
+        <label>ID</label>:<br />
+        <input value="@Model.userDto.id" />
+    </p>
+    <p>
+        <label>Username</label>:<br />
+        <input value="@Model.userDto.username" />
+    </p>
+</div>
