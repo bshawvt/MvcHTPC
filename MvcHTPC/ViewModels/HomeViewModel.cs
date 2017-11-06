@@ -10,9 +10,14 @@ namespace MvcHTPC.ViewModels
     {
         public bool isLoggedIn { get; set; }
         public UserDto userDto { get; set; }
+        public List<FolderDto> folderDtos { get; set; }
+        public List<ContentDto> contentDtos { get; set; }
+
         public HomeViewModel()
         {
             this.userDto = new UserDto();
+            this.folderDtos = new List<FolderDto>();
+            this.contentDtos = new List<ContentDto>();
         }
     }
 }

@@ -15,11 +15,7 @@ namespace MvcHTPC.Services
         {
 
         }
-
-        public FolderDto MakeFolder()
-        {
-            return null;
-        }
+        
         public bool FolderExistsWithLocation(string location)
         {
             var folders = db.tblFolders.Where(x => x.location == location);
@@ -30,6 +26,36 @@ namespace MvcHTPC.Services
             }
             Debug.WriteLine("folder({0}) does not exist", location, "");
             return false;
+        }
+        public long CreateFolderByDto(UserDto user, string title, string description)
+        {
+
+            if (user == null || user.id == 0)
+            {
+                return 1;
+            }
+            if (FolderExistsWithLocation(title) == false)
+            {
+                db.tblFolders.Add(new folders
+                {
+                    dateOfCreation = DateTime.Now,
+                    description = description,
+                    //forumId = -1,
+                    groupIds = "",
+                    hidden = Models.DbModels.DbStaticEnums.HiddenState.PRIVATE,
+                    iconText = "",
+                    //id = -1,
+                    lastModified = DateTime.Now,
+                    location = Utilities.MyTools.Encode64String(title+user.username),
+                    locked = false,
+                    //modifiedLogId = -1,
+                    ownersId = user.id,
+                    title = title,
+                });
+                db.SaveChanges();
+                return 0;
+            }
+            return 1;
         }
         public void CreateFolder(string location)
         {
@@ -49,11 +75,27 @@ namespace MvcHTPC.Services
                     locked = false,
                     //modifiedLogId = -1,
                     //ownersId = -1,
-                    title = "",
+                    title = location,
                 });
                 db.SaveChanges();
             }
 
+        }
+
+        public List<FolderDto> GetAllFoldersBelongingToUser(long id)
+        {
+            var f = from i in db.tblFolders
+                    where i.ownersId == id
+                    select i;
+            List<FolderDto> r = new List<FolderDto>();
+            ContentService cs = new ContentService();
+            foreach (var ff in f)
+            {
+                var folder = new FolderDto(ff);
+                folder.contentDtos = cs.GetAllContentByFolderId(folder.id);
+                r.Add(folder);
+            }
+            return r;
         }
 
         public bool AddContentToFolder(string folder, string content)
@@ -121,6 +163,9 @@ namespace MvcHTPC.Services
         {
             
             FolderDto f = new FolderDto(db.tblFolders.Where(x => x.location == folder).First());
+
+            ContentService cs = new ContentService();
+            f.contentDtos = cs.GetAllContentByFolderId(f.id);
             return f;
         
         }

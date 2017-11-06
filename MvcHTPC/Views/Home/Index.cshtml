@@ -6,8 +6,57 @@
 {
     <div>
         <p>Welcome @Model.userDto.username!</p>
-        [Saved channels ticker]<br/>
-        [Recommended channels ticker]
+        [Modify Folders]
+        <div style="border: 1px solid #000;">
+            @using (Html.BeginForm("CreateFolder", "Home", FormMethod.Post, new { nctype = "multipart/form-data" }))
+            {
+                <div>
+                    <span style="float: right;">
+                        <label>Folder Name: </label> @Html.TextBox("title", null, new { placeholder = "My Folder" })<br/>
+                    </span>
+                    <span style="clear: both; display: table;"></span>
+                    <span style="float: right;">
+                        <label>Folder Description: </label> @Html.TextBox("description", null, new { placeholder = "This is my brand new folder!" })
+                    </span>
+                    <span style="clear: both; display: table;"></span>
+                    <br/>
+                    <div style="float: right;">
+                        <input type="submit" value="Create Folder" />
+                    </div>
+                    <span style="clear: both; display: table;"></span>
+                </div>
+            }
+
+        </div>
+        <br/>
+        <table>
+            <thead>
+                <tr>
+                    <th>Folders</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    @foreach (var i in Model.folderDtos)
+                    {
+                        <tr>
+                            <td>
+                                @i.title - @i.location
+                                @foreach (var c in i.contentDtos)
+                                {
+
+                                    <div style="border: 1px solid #000;">
+                                        @c.bodyText
+                                    </div>
+
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tr>
+            </tbody>
+        </table>
+
     </div>
 }
 else

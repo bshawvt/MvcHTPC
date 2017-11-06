@@ -23,6 +23,8 @@ namespace MvcHTPC.DTOs
         public long? modifiedLogId { get; set; }
         public string iconText { get; set; }
 
+        public List<ContentDto> contentDtos { get; set; } // content!
+
         public FolderDto()
         {
 
@@ -42,7 +44,7 @@ namespace MvcHTPC.DTOs
             this.description = f.description;
             this.modifiedLogId = f.modifiedLogId;
             this.iconText = f.iconText;
-
+            this.contentDtos = new List<ContentDto>();
         }
 
     }

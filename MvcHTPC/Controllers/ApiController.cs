@@ -29,7 +29,7 @@ namespace MvcHTPC.Controllers
              * if folder exists and folder not locked
              * do database things
              */
-            folderService.CreateFolder(folder);
+            //folderService.CreateFolder(folder);
             if (folderService.AddContentToFolder(folder, url) == true)
             {
                 result = "Success";

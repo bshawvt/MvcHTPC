@@ -18,6 +18,10 @@ namespace MvcHTPC.DTOs
         public DateTime? lastModification { get; set; }
         public long? modifiedLogId { get; set; }
 
+        public ContentDto()
+        {
+
+        }
         public ContentDto(contents c)
         {
             this.id = c.id;
