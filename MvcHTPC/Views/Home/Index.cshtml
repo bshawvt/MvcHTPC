@@ -2,6 +2,30 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<head>
+    <style>
+        .my-no-select {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+        }
+
+        .my-center-content {
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript">
+
+        jQuery(document).ready(function (e) {
+            jQuery(".jContentLocation").on("click", function (e) {
+                console.log(jQuery(this.children[0]).text());
+            })
+        });
+
+    </script>
+</head>
 @if (User.Identity.IsAuthenticated)
 {
     <div>
@@ -29,34 +53,26 @@
 
         </div>
         <br/>
-        <table>
-            <thead>
-                <tr>
-                    <th>Folders</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
+
                     @foreach (var i in Model.folderDtos)
                     {
-                        <tr>
-                            <td>
-                                @i.title - @i.location
+                      
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div>
+                                    @i.title<span>:</span> <a onclick="return false;" class="jContentLocation"><input style="cursor: pointer;" type="text" class="well well-sm" value="@i.location"/></a>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="list-group">
                                 @foreach (var c in i.contentDtos)
                                 {
-
-                                    <div style="border: 1px solid #000;">
-                                        @c.bodyText
-                                    </div>
-
+                                    <a class="list-group-item my-center-content" href="@c.bodyText">@c.bodyText</a>
                                 }
-                            </td>
-                        </tr>
+                            </div>
+                        </div>
+                    </div>
                     }
-                </tr>
-            </tbody>
-        </table>
-
     </div>
 }
 else

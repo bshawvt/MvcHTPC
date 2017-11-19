@@ -19,8 +19,13 @@ namespace MvcHTPC.Services
         }
         public UserDto GetUserDtoById(long id)
         {
-            UserDto user = new UserDto(db.tblUsers.Find(id));
-            return user;
+            var _user = db.tblUsers.Find(id);
+            if (_user != null)
+            {
+                UserDto user = new UserDto(_user);
+                return user;
+            }
+            return null;
         }
         public UserDto GetUserDtoByUsername(string username)
         {

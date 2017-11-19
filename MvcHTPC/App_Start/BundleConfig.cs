@@ -42,6 +42,16 @@ namespace MvcHTPC
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/bootstrap4").Include(
+                    /*"~/Scripts/bootstrap/css/bootstrap-grid.css",
+                    "~/Scripts/bootstrap/css/bootstrap-grid.min.css",
+                    "~/Scripts/bootstrap/css/bootstrap-reboot.css",
+                    "~/Scripts/bootstrap/css/bootstrap-reboot.min.css",
+                    "~/Scripts/bootstrap/css/bootstrap.min.css", */
+                    "~/Scripts/bootstrap/css/bootstrap.css",
+                    "~/Scripts/bootstrap/js/bootstrap.js"
+                ));
         }
     }
 }

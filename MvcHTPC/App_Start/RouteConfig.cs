@@ -14,11 +14,6 @@ namespace MvcHTPC
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "api",
-                url: "api/{action}/{email}",
-                defaults: new { controller = "Api", action = "Index", email = UrlParameter.Optional }
-            );
-            routes.MapRoute(
                 name: "Account",
                 url: "Account/{action}",
                 defaults: new { controller = "Account", action = "Login" }

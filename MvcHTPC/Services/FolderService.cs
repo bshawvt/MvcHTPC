@@ -46,7 +46,7 @@ namespace MvcHTPC.Services
                     iconText = "",
                     //id = -1,
                     lastModified = DateTime.Now,
-                    location = Utilities.MyTools.Encode64String(title+user.username),
+                    location = Utilities.MyTools.Encode64String(user.username + "|" + title),
                     locked = false,
                     //modifiedLogId = -1,
                     ownersId = user.id,
@@ -99,7 +99,7 @@ namespace MvcHTPC.Services
         }
 
         public bool AddContentToFolder(string folder, string content)
-        {
+        { // super deprecated
             var f = from i in db.tblFolders
                     where i.location == folder
                     select i;
@@ -110,14 +110,15 @@ namespace MvcHTPC.Services
                 Debug.WriteLine("f is not null");
                 db.tblContents.Add(new contents
                 {
+
                     folderId = _f.id,
                     bodyText = content,
-                    //id = 0,
+                   // id = null,
                     dateOfCreation = DateTime.Now,
                     lastModification = DateTime.Now,
                     //modifiedLogId = 0,
-                    //ownerId = 0,
-                    title = "Test"
+                    ownerId = 0,
+                    title = content
                 });
                 db.SaveChanges();
                 return true;

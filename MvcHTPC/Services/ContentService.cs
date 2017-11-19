@@ -12,7 +12,7 @@ namespace MvcHTPC.Services
         private MvcHTPCContext db = new MvcHTPCContext();
         public ContentService()
         {
-
+            
         }
 
         public List<ContentDto> GetAllContentByFolderId(long id)

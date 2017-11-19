@@ -5,9 +5,11 @@ using MvcHTPC.Services;
 using MvcHTPC.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace MvcHTPC.Controllers
 {
@@ -21,10 +23,20 @@ namespace MvcHTPC.Controllers
             UserService userService = new UserService();
             FolderService fs = new FolderService();
 
-            if (User.Identity.IsAuthenticated)
+            var user = userService.GetUserDtoById(Convert.ToInt64(User.Identity.GetUserId())); ;
+            if (user != null)
             {
-                viewModel.userDto = userService.GetUserDtoById(Convert.ToInt64(User.Identity.GetUserId()));
-                viewModel.folderDtos = fs.GetAllFoldersBelongingToUser(viewModel.userDto.id);
+                Debug.WriteLine("user not null");
+                if (User.Identity.IsAuthenticated)
+                {
+                    viewModel.userDto = user;
+                    viewModel.folderDtos = fs.GetAllFoldersBelongingToUser(viewModel.userDto.id);
+                }
+            }
+            else
+            {
+                Debug.WriteLine("User is totally null");
+                //return RedirectToAction("Logout", "Auth");
             }
             return View(viewModel);
         }
