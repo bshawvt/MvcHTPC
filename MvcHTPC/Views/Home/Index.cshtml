@@ -14,6 +14,16 @@
 
         .my-center-content {
             text-align: center;
+            font-size: 2.5em;
+            color: rgb(255, 100, 100);
+
+        }
+        a.my-center-content:link {
+            color: rgb(255, 100, 100);
+        }
+        .linkcolors {
+            color: #F00;
+            text-shadow: 0px 0px #000, 1px 0px #000, 0px 1px #000, 1px 1px #000, -1px 0px #000, 0px -1px #000, -1px -1px #000;
         }
     </style>
     <script type="text/javascript">
@@ -67,7 +77,7 @@
                             <div class="list-group">
                                 @foreach (var c in i.contentDtos)
                                 {
-                                    <a class="list-group-item my-center-content" href="@c.bodyText">@c.bodyText</a>
+                                    <a class="list-group-item my-center-content linkcolors" href="@c.bodyText" style="color: rgb(255, 196, 196);">@c.bodyText</a>
                                 }
                             </div>
                         </div>

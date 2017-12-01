@@ -6,7 +6,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\Users\bshaw\Documents\Publish</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\www\publish</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="ApplicationInsights.config">
@@ -79,10 +79,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/05/2012 10:08:46</publishTime>
     </File>
     <File Include="bin/MvcHTPC.dll">
-      <publishTime>08/20/2017 16:27:35</publishTime>
+      <publishTime>11/19/2017 11:49:10</publishTime>
     </File>
     <File Include="bin/MvcHTPC.pdb">
-      <publishTime>08/20/2017 16:27:35</publishTime>
+      <publishTime>11/19/2017 11:49:10</publishTime>
     </File>
     <File Include="bin/MySql.Data.dll">
       <publishTime>06/17/2016 18:29:10</publishTime>
@@ -271,7 +271,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/13/2017 21:29:36</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>08/17/2017 22:02:48</publishTime>
+      <publishTime>11/09/2017 20:39:02</publishTime>
     </File>
     <File Include="Scripts/bootstrap.js">
       <publishTime>08/12/2017 00:50:34</publishTime>
@@ -279,11 +279,71 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/bootstrap.min.js">
       <publishTime>08/12/2017 00:50:34</publishTime>
     </File>
+    <File Include="Scripts/bootstrap/css/bootstrap-grid.css">
+      <publishTime>11/10/2017 22:36:12</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/css/bootstrap-grid.css.map">
+      <publishTime>11/10/2017 22:36:12</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/css/bootstrap-grid.min.css">
+      <publishTime>11/10/2017 22:36:12</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/css/bootstrap-grid.min.css.map">
+      <publishTime>11/10/2017 22:36:12</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/css/bootstrap-reboot.css">
+      <publishTime>11/10/2017 22:36:12</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/css/bootstrap-reboot.css.map">
+      <publishTime>11/10/2017 22:36:12</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/css/bootstrap-reboot.min.css">
+      <publishTime>11/10/2017 22:36:12</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/css/bootstrap-reboot.min.css.map">
+      <publishTime>11/10/2017 22:36:12</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/css/bootstrap.css">
+      <publishTime>11/10/2017 22:36:12</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/css/bootstrap.css.map">
+      <publishTime>11/10/2017 22:36:13</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/css/bootstrap.min.css">
+      <publishTime>11/10/2017 22:36:13</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/css/bootstrap.min.css.map">
+      <publishTime>11/10/2017 22:36:13</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/js/bootstrap.bundle.js">
+      <publishTime>11/10/2017 22:36:13</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/js/bootstrap.bundle.js.map">
+      <publishTime>11/10/2017 22:36:13</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/js/bootstrap.bundle.min.js">
+      <publishTime>11/10/2017 22:36:13</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/js/bootstrap.bundle.min.js.map">
+      <publishTime>11/10/2017 22:36:13</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/js/bootstrap.js">
+      <publishTime>11/10/2017 22:36:13</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/js/bootstrap.js.map">
+      <publishTime>11/10/2017 22:36:13</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/js/bootstrap.min.js">
+      <publishTime>11/10/2017 22:36:13</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap/js/bootstrap.min.js.map">
+      <publishTime>11/10/2017 22:36:13</publishTime>
+    </File>
     <File Include="Scripts/htpcsuite/htpc.common.js">
-      <publishTime>08/19/2017 14:09:28</publishTime>
+      <publishTime>08/27/2017 17:13:34</publishTime>
     </File>
     <File Include="Scripts/htpcsuite/htpc.core.js">
-      <publishTime>08/19/2017 13:49:23</publishTime>
+      <publishTime>08/27/2017 15:48:51</publishTime>
     </File>
     <File Include="Scripts/jquery-3.1.1.js">
       <publishTime>08/12/2017 00:59:45</publishTime>
@@ -331,10 +391,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/06/2017 20:49:28</publishTime>
     </File>
     <File Include="Views/Admin/Index.cshtml">
-      <publishTime>08/19/2017 20:40:47</publishTime>
+      <publishTime>08/20/2017 21:21:46</publishTime>
     </File>
     <File Include="Views/Admin/Result.cshtml">
       <publishTime>08/19/2017 19:23:01</publishTime>
+    </File>
+    <File Include="Views/Api/Index.cshtml">
+      <publishTime>11/11/2017 00:31:17</publishTime>
     </File>
     <File Include="Views/Auth/Index.cshtml">
       <publishTime>08/12/2017 15:28:45</publishTime>
@@ -348,11 +411,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Community/Index.cshtml">
       <publishTime>08/20/2017 03:20:44</publishTime>
     </File>
+    <File Include="Views/Community/_NotifierPartial.cshtml">
+      <publishTime>08/20/2017 21:53:51</publishTime>
+    </File>
     <File Include="Views/Folder/Folder.cshtml">
       <publishTime>08/20/2017 03:16:43</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>08/20/2017 14:47:24</publishTime>
+      <publishTime>11/11/2017 17:31:16</publishTime>
     </File>
     <File Include="Views/Sandbox/Index.cshtml">
       <publishTime>08/19/2017 13:37:37</publishTime>
@@ -364,7 +430,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/15/2017 21:56:28</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>08/19/2017 14:08:46</publishTime>
+      <publishTime>11/11/2017 00:25:54</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>06/13/2017 21:29:36</publishTime>
@@ -373,7 +439,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/13/2017 21:29:36</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/20/2017 16:27:35</publishTime>
+      <publishTime>11/19/2017 11:49:13</publishTime>
     </File>
   </ItemGroup>
 </Project>
