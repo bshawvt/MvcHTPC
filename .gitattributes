@@ -1,2 +1,4 @@
+* linguist-vendored
 *.cs linguist-detectable=true 
 *.csharp linguist-detectable=true 
+*.cshtml linguist-detectable=true
